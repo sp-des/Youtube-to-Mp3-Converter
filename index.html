@@ -1,72 +1,58 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<html>
 <head>
-    <title>Youtube to Mp3 Converter</title>
-    <link href="main.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Youtube to mp3</title>
+    <link href="/home/sundevil/Desktop/Youtube to mp3 api/main.css" rel="stylesheet">
+    <meta charset="utf-8" />
 </head>
-
 <div class="intro">
     <div class="intro--banner">
-<body>
-    <center>
-        <h1>YouTube to Mp3 converter</h1>
-        <span>If you are on a mobile device you may experience links to other sites. And in which case just close out of them and go back to this page and try again. Another problem you might see is an error message saying your devise is infected with a virus. This due to the API I'm using and the people who made the API are money hungry. You aren't actually infected. Just ignore it and refresh the page.</span>
-        <bodyy>
-        <form name="yt" action="" method="get">
-            <div class="input-group col-lg-8">
-                <input type="text" name="yturl" class="form-control input-lg ui-autocomplete-input" autocomplete="off" placeholder="https://www.youtube.com/watch?v=dA42vievwZk">
-                <span class="input-group-btn"></bodyy>
-                <button class="btn btn-info" style="height:46px;" type="submit">CONVERT</button></span>
-            </div>
-        </form>
-        <div id="converter-wrapper" class="input-group col-lg-8" style="margin-top:20px;"></div>
-        </span>
-    </center>
-    <!-- <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
-    <script type="text/javascript">
-        (function($) {
-            $.fn.isYouTube = function() {
-                var regExpr = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-                var curVal = $(this).val();
-                return (curVal.match(regExpr)) ? RegExp.$1 : false;
-            }
-        })(jQuery);
 
-        $(document).ready(function() {
+        <body>
+            <script type="text/javascript">
+                function getSrc() {
+                    var input = document.getElementById('input');
 
-            $('form[name=yt]').submit(function() {
-
-                var ytId = $('input[name=yturl]').isYouTube();
-                if (ytId !== false) {
-
-                    $iframe = $('<iframe>');
-                    $iframe.attr({
-                        src: 'https://yt-mp3s.com/mp3/' + ytId,
-                        frameBorder: 0
-                    });
-                    $iframe.css({
-                        width: '100%',
-                        height: '100%'
-                    });
-
-                    //Remove iframe if one exists (on second url some will exists)
-                    $('#converter-wrapper').find('iframe').remove()
-
-                    $('#converter-wrapper').append($iframe);
-
-                } else {
-
-                    alert("Please enter a valid youtube url");
+                    if (input.value == "" | input.value.length < 11) {
+                        alert('Input field is either empty or id doesn\'t match with id of any video.');
+                    } else {
+                        var id = input.value.replace("https://", "").replace("http://", "").replace("www.", "").replace("youtube.com/", "").replace("youtu.be/", "").replace("watch?v=", "").replace("", "");
+                        var iframe = document.getElementById('iframe');
+                        iframe.src = 'https://www.convertmp3.io/widget/button/?video=https://www.youtube.com/watch?v=' + id;
+                        /*
+                        iframe.onload = function() {
+                        	console.log(document.getElementById("iframe").contentWindow.document.getElementById("percentageText").value);
+                        };
+                        */
+                    }
                 }
-                return false;
-            });
-        });
-    </script>
-</body>
+
+                function keyUp(t) {
+                    if (t.value.match(/\s/g)) {
+                        t.value = t.value.replace(/\s/g, '');
+                    }
+                }
+            </script>
+            <div id="shadow"></div>
+            <div id="content">
+                <div id="yeet">
+                    <div>
+                        <h1>Youtube to Mp3 Converter</h1>
+                    </div>
+                </div>
+                <bodyy>
+                    <input id="input" placeholder="Paste video URI or ID here." onkeyup="keyUp(this)" />
+                </bodyy>
+                <button id="generate" onclick="getSrc()">Generate</button>
+                <br>
+                <iframe id="iframe" width="250px" height="60px" scrolling="no" style="border:none;" src=""></iframe>
+                <br>
+            </div>
+            <footer>
+                <span id="info"><a href="https://www.convertmp3.io" target="_blank">convertmp3.io</a>'s api is used.</span>
+            </footer>
+        </body>
+    </div>
 </div>
-</div>
+
 </html>
