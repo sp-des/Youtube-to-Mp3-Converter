@@ -1,2 +1,4 @@
 # Youtube-to-Mp3-Converter
-A Converter using the yt-mp3s API
+A converter using the convertmp3.io's API.
+
+http://convertmp3.io/api/
